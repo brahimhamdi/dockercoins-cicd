@@ -15,7 +15,7 @@ pipeline {
 
     stage('Checkout') {
       steps {
-        git url: 'https://github.com/brahimhamdi/dockercoins.git',
+        git url: 'https://github.com/brahimhamdi/dockercoins-cicd.git',
             branch: 'master'
       }
     }
@@ -80,6 +80,7 @@ pipeline {
       steps {
         withKubeConfig([credentialsId: 'kubeconfig']) {
           sh '''
+            kubectl delete ns dockercoins-staging --force --grace-period 0
             kubectl create namespace "$PROD_NS" --dry-run=client -o yaml | kubectl apply -f -
             kubectl apply -f dockercoins.yaml -n "$PROD_NS"
             kubectl set image deployment/webui webui=$DOCKERHUB_USER/webui:$IMAGE_TAG -n "$PROD_NS"
