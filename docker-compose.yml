@@ -1,0 +1,18 @@
+services:
+
+  rng:
+    image: brahimhamdi/rng:latest
+
+  hasher:
+    image: brahimhamdi/hasher:latest
+
+  redis:
+    image: redis:alpine
+
+  worker:
+    image: brahimhamdi/worker:latest
+
+  webui:
+    image: ${WEBUI_IMAGE:-brahimhamdi/webui:latest}
+    ports:
+      - "8000:80"
