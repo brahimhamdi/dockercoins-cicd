@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-    DOCKERHUB_USER = 'brahimhamdi'
+    DOCKERHUB_USER = 'brahimhamdi'  # à remplacer par votre login DockerHub
     IMAGE_TAG      = "${env.BUILD_NUMBER}"
     DOCKERHUB      = credentials('dockerhub')
     STAGING_NS     = 'dockercoins-staging'
